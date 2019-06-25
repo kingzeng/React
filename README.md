@@ -9,24 +9,27 @@ UnMount => 销毁阶段
 1 componentWillMount()
 
    note: 该方法是唯一一个在render()之前调用的生命周期方法。因此是在服务端渲染中唯一被调用的方法。
-   
    explain: 1.setState不会发生重新渲染(re-render);
             2.通常情况下，推荐用constructor()方法代替
             3.可以进行开启定时器、向服务器发送请求等操作
             
 2 render()
+
    note:组件渲染
    
 3 componentDidMount()
+
    note:组件已经被渲染到页面中后触发 
    explain: 1.React 已经渲染了组件并且将组件插入 DOM。因此如有有任何依赖于 DOM 的初始化，应该放在这里
             2.这里可以加载服务器数据，并且如果使用了redux之类的数据服务，这里可以出发加载服务器数据的action
             3.这里可以使用setState()方法触发重新渲染(re-render)
   
 4 componentWillReceiveProps(nextProps) =>将更新为 static getDerivedStateFromProps（新增）
+
    note: 当组件接收到新的props，该方法会首先被调用，但是需要注意一点，即使props并没有发生改变，该方法也会被调用，所以使用该方法的时候要确保比较               this.props和nextProps，避免不必要的渲染
    
 5 shouldComponentUpdate(nextProps, nextState)
+
    note:有些时候需要避免不必要的渲染，可以使用该方法。返回false意味着 React 不执行componentWillUpdate()，render()，componentDidUpdate()。
         组件首次渲染时并不会触发
    explain:一般我们通过该函数来优化性能：
@@ -35,16 +38,18 @@ UnMount => 销毁阶段
 例如React中的就提供了一个PureComponent的类，当我们的组件继承于它时，组件更新时就会默认先比较新旧属性和状态，从而决定组件是否更新。值得注意的是，PureComponent进行的是浅比较，所以组件状态或属性改变时，都需要返回一个新的对象或数组
  
 6 componentWillUpdate(nextProps, nextState)()即将移除
+
     note:该方法在被渲染前调用。shouldComponentUpdate在新的props进入组件或者state改变的时候调用。组件首次渲染不会触发
 
 7 componentDidUpdate(prevProps, prevState)
+
     note:组件被更新完成后触发。页面中产生了新的DOM的元素，可以进行DOM操作
     
 8 componentWillUnmount()
+
     note:组件被销毁时触发。这里我们可以进行一些清理操作，例如清理定时器，取消Redux的订阅事件等等。
     
     
- // code
 import React from 'react'
 import ReactDOM from 'react-dom';
 
