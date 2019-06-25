@@ -7,7 +7,9 @@ Update => 运行中阶段
 UnMount => 销毁阶段
 
 1 componentWillMount()
+
    note: 该方法是唯一一个在render()之前调用的生命周期方法。因此是在服务端渲染中唯一被调用的方法。
+   
    explain: 1.setState不会发生重新渲染(re-render);
             2.通常情况下，推荐用constructor()方法代替
             3.可以进行开启定时器、向服务器发送请求等操作
